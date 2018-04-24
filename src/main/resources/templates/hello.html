@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8"/>
+<title>hello thymeleaf</title>
+<script type="text/javascript" src="../static/js/jquery.js" th:src="@{/js/jquery.js}" ></script>
+<script type="text/javascript" src="../static/js/browser.js" th:src="@{/js/browser.js}" ></script>
+</head>
+<body>
+<div>
+        <h2 id="title" th:text="${msg}">thymeleaf</h2>
+ </div>
+</body>
+
+<script type="text/javascript">
+
+var startTime = Math.ceil(new Date().getTime()/1000); //单位秒
+window.onbeforeunload = function() {
+	var endTime = Math.ceil(new Date().getTime()/1000);//单位秒
+	var duration = endTime - startTime;
+	$.ajax({
+		url:'statistics',
+		type:'post',
+		data: {"time":duration,"browserName":browserInfor.getBrowserInfo(),"OS":browserInfor.detectOS()+"_"+browserInfor.digits()}
+	});
+}
+
+console.log(browserInfor.getBrowserInfo()+"/"+browserInfor.detectOS()+"/"+browserInfor.digits());
+
+</script>
+
+
+</html>

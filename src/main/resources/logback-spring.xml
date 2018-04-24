@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+	<!-- 文件输出格式 
+		%d{yyyy-MM-dd HH:mm:ss}——日志输出时间
+		%thread——输出日志的进程名字，这在Web应用以及异步任务处理中很有用
+		%-5level——日志级别，并且使用5个字符靠左对齐
+		%logger{36}——日志输出者的名字
+		%msg——日志消息
+		%n——平台的换行符
+	-->
+    <property name="pattern" value="%d{yyyy-MM-dd HH:mm:ss} [%thread] -%-5level %logger{36} %msg%n" />
+
+	<!-- 控制台 -->
+	<appender name="console" class="ch.qos.logback.core.ConsoleAppender">
+		<encoder>
+			<pattern>${pattern}</pattern>
+		</encoder>
+	</appender>
+	
+	<root level="warn">
+           <appender-ref ref="console" />
+    </root>
+    
+     <logger name="com.naruto" level="info" additivity="false">
+        <appender-ref ref="console"/>
+    </logger>
+    
+    <!-- mybatis sql日志输出 -->
+    <logger name="com.naruto.dao" level="debug" additivity="false">
+        <appender-ref ref="console"/>
+    </logger>
+    
+</configuration>
